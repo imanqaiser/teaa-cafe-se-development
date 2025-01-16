@@ -1,0 +1,142 @@
+
+@font-face {
+  font-family: 'Gotham Bold';
+  src: url('fonts/GothamBold.otf') format('opentype');
+  /* Add additional font properties here if needed */
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+
+body {
+  font-family: 'Gotham Bold', sans-serif;
+  background-color: #EEE9D9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.invoice-background {
+  margin-right: 20px; /* Adjust margin as needed */
+}
+
+
+#invoice-table {
+  width: 80%; /* Change this value to adjust the width of the table */
+  margin: 0 auto; /* This will center the table horizontally */
+}
+
+.invoice-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100; /* Ensure it's above other content */
+}
+
+.invoice-container {
+  margin-top: 280px; /* Adjust this value as needed to position it below the header */
+  width: 100%; /* Make it span the full width of its parent container */
+  max-width: 1050px; /* Set maximum width if needed */
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 60px; /* Adjust padding-top to account for header height */
+}
+
+
+
+
+
+
+
+.invoice-background img {
+  max-width: 100%;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.invoice-header img {
+  max-width: 100%;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #465240;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #465240;
+  color: white; /* Change text color to white */
+}
+
+.invoice-heading {
+  background-color: none;
+  color: #465240;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.home-button {
+  position: fixed;
+  bottom: 10px; /* Adjust this value to your preference */
+  left: 1350px; /* Adjust this value to your preference */
+  z-index: 999; /* Ensure it's above other elements */
+}
+
+
+
+.customer-name {
+  font-family: "Poppins Light", sans-serif;
+  position: absolute;
+  top: 225px;
+  left: 300px;
+}
+
+.customer-address {
+  font-family: "Poppins Light", sans-serif;
+  position: absolute;
+  top: 225px;
+  left: 600px;
+}
+
+.order-date {
+  font-family: "Poppins Light", sans-serif;
+  position: absolute;
+  top: 225px;
+  left: 1150px;
+}
+
+.order-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Ensure it's on top of other elements */
+}
+
+.order-image {
+width: auto; /* Adjust size as needed */
+height: auto; /* Adjust size as needed */
+}
+

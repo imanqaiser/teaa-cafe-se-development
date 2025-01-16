@@ -1,0 +1,264 @@
+/* Your existing CSS styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  padding: 0;
+}
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+th {
+  font-family: "Poppins Light", sans-serif; /* Use the correct font family name */
+}
+
+
+.header {
+  width: 100%;
+  height: 4000px;
+  background: rgba(238, 233, 217, 1);
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+
+.backing-rectangle-green {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1440px;
+  height: 92px;
+  background-color: rgba(125, 145, 116, 1);
+  opacity: 1;
+  box-shadow: 0px 4px 20px 4px rgba(0, 0, 0, 0.25);
+}
+
+.white-rectangle {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 1440px;
+  height: 72px;
+  background-color: rgba(246, 243, 235, 1);
+}
+
+.logo-container {
+  position: absolute;
+  top: 21px;
+  left: 21px;
+}
+
+.about {
+  position: absolute;
+  top: 21px;
+  left: 1050px;
+}
+
+.home {
+  position: absolute;
+  top: 21px;
+  left: 930px;
+}
+
+.location {
+  position: absolute;
+  top: 37px;
+  left: 1230px;
+}
+
+.shopping-cart {
+  position: absolute;
+  top: 108px;
+  left: 1348px;
+}
+
+.place-order {
+  position: absolute;
+  top: 234px;
+  left: 495px;
+}
+
+.coffee {
+  position: absolute;
+  top: 106px;
+  left: 21px;
+}
+
+.icedtea {
+  position: absolute;
+  top: 106px;
+  left: 155px;
+}
+
+.milkshake {
+  position: absolute;
+  top: 106px;
+  left: 301px;
+}
+
+.coffee-title {
+  position: absolute;
+  top: 366px;
+  left: 210px;
+}
+
+.ice-tea-title {
+  position: absolute;
+  top: 1120px;
+  left: 210px;
+}
+
+.milkshake-title {
+  position: absolute;
+  top: 1877px;
+  left: 215px;
+}
+
+.button1 {
+  position: absolute;
+  top: 937px;
+  left: 464px;
+}
+
+.button2 {
+  position: absolute;
+  top: 937px;
+  left: 830px;
+}
+
+.button3 {
+  position: absolute;
+  top: 937px;
+  left: 1198px;
+}
+
+.button4 {
+  position: absolute;
+  top: 1694px;
+  left: 464px;
+}
+
+.button5 {
+  position: absolute;
+  top: 1694px;
+  left: 832px;
+}
+
+.button6 {
+  position: absolute;
+  top: 1694px;
+  left: 1199px;
+}
+
+.button7 {
+  position: absolute;
+  top: 2450px;
+  left: 469px;
+}
+
+.button8 {
+  position: absolute;
+  top: 2450px;
+  left: 835px;
+}
+
+.button9 {
+  position: absolute;
+  top: 2450px;
+  left: 1203px;
+}
+
+.button10 {
+  position: absolute;
+  top: 3013px;
+  left: 470px;
+}
+
+.button11 {
+  position: absolute;
+  top: 3013px;
+  left: 836px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(125, 145, 116, 0.5);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+
+.shopping-cart-section {
+  position: absolute;
+  top: 3400px;
+  left: 100px;
+}
+
+.cart-heading {
+  text-align: center;
+  margin-bottom: 7%;
+}
+
+.cart-table {
+  width: 100%; /* Adjust width as needed */
+  /* Add other styling properties as needed */
+}
+.form-control {
+  opacity: 0.5;
+  width: 40%; /* Adjust the width as needed */
+  margin: 0 auto; /* Center the text boxes horizontally */
+}
+
+/* Change font of labels to Poppins */
+label {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Center the label and input field pairs */
+.mb-3 {
+  text-align: center;
+}
+
+.user-info-container {
+  position: absolute;
+  top: 4500px;
+  left: 100px;
+}

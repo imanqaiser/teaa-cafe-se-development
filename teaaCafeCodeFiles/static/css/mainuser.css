@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    width:1440;
+    height: 818;
+}
+
+@font-face {
+    font-family: 'Gotham Bold';
+    src: url('fonts/GothamBold.otf') format('opentype');
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+
+.poppins-light {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.header.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -99999;
+}
+
+.username-position {
+    position: absolute;
+    top: 454px;
+    left: 392px;
+}
+
+/* CSS for positioning the password input */
+.password-position {
+    position: absolute;
+    top: 547px;
+    left: 392px;
+}
+
+/* CSS for username input styling */
+.username-input,.password-input {
+    width: 656px;
+    height: 45px;
+    padding: 10px;
+    border: none;
+    border-radius: 45px;
+    font-size: 18px;
+    background-color: transparent; /* Set background color to transparent */
+    outline-color: transparent;/* Change the focus color */
+
+    color: white; /* Text color */
+    font-family: 'Gotham Bold', sans-serif; /* Apply Gotham Bold font */
+    line-height:  1.05em;; /* Add line spacing */
+
+}
+
+
+.username-input::placeholder,
+.password-input::placeholder {
+    color: white; /* Placeholder text color */
+    font-size: 18px; /* Placeholder text size */
+    font-family: 'Gotham Bold', sans-serif; /* Apply Gotham Bold font */
+    /* Add any other styles you want to apply */
+}
+
+.login-button{
+    position: absolute;
+    top: 610px;
+    left: 629px;
+}
+
+.signup-button{
+    position: absolute;
+    top: 696px;
+    left: 760px;
+}
+
+.error-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Ensure it's on top of other elements */
+  }
+
+.error-image {
+width: auto; /* Adjust size as needed */
+height: auto; /* Adjust size as needed */
+}
+
+
+
+
