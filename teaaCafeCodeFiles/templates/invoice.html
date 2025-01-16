@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="{% static './css/styles.css' %}">
+</head>
+<body>
+
+    <div id="orderplacedPopup" class="order-popup">
+        <img src="{% static 'images/OrderPlacedPopUp.svg' %}" alt="orderplaced" class="order-image">
+    </div>
+
+    
+    
+    <div class="invoice-header">
+        <div class="invoice-background">
+            <img src="{% static 'images/InvoiceHeader.svg' %}" alt="header">
+        </div>
+
+        <div class="customer-details">
+            <p class="customer-name">
+                {{ customer_data.first_name }} {{ customer_data.last_name }}
+            </p>
+            <p class="customer-address">
+                House# {{ customer_data.house }}, {{ customer_data.street }}, {{ customer_data.area }}, {{ customer_data.city }}
+            </p>
+            <p class="order-date">
+                {{ customer_data.date_ordered }}
+            </p>
+        </div>
+    </div>
+
+    <div class="invoice-container">
+        
+        <table id="invoice-table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody id="invoice-body">
+                <!-- Rows will be added dynamically here -->
+                {% for item in invoice_details %}
+                    <tr>
+                        <td>{{ item.prod_name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.unit_price }}</td>
+                        <td>{{ item.total_price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="invoice-heading">
+            <h2>Total Price of Order: {{ total_price }}</h2>
+        </div>
+
+        <a href="home.html" class="home-button">
+            <img src="{% static 'images/HomeButtonInvoice.svg' %}" alt="Home">
+        </a>
+    </div>
+
+
+    <script>
+        const errorPopup = document.getElementById('orderplacedPopup');
+            errorPopup.style.display = 'block';
+            setTimeout(function () {
+                    errorPopup.style.display = 'none';
+                }, 2000);
+        </script>
+ 
+
+</body>
+</html>

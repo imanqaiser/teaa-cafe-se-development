@@ -1,0 +1,349 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="{% static './css/mainorder.css' %}" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaa Cafe</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/9d9796826b.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body style="background-color: #EEE9D9">
+  
+
+    <div class="header">
+        <!-- rectangle -->
+        <div class="white-rectangle"></div>
+        <div class="backing-rectangle-green"></div>
+
+        <div class="logo-container">
+            <img src="{% static 'images/LogoOrder.svg' %}" alt="Logo">
+        </div>
+        <a href="about.html">
+            <img src="{% static 'images/AboutOrder.svg' %}" alt="About" class="about">
+        </a>
+        <a href="home.html">
+            <img src="{% static 'images/HomeOrder.svg' %}" alt="Home" class="home">
+        </a>
+        <a href="location.html">
+            <img src="{% static 'images/LocationOrder.svg' %}" alt="Location" class="location">
+        </a>
+
+        <button onclick="showCart()">
+            <img src="{% static 'images/ShoppingCart.svg' %}" alt="Cart" class="shopping-cart">
+        </button>
+
+
+
+
+        <img src="{% static 'images/PlaceOrder.svg' %}" alt="PlaceOrder" class="place-order">
+
+        <!-- COFFEE SECTION -->
+        <a href="#coffee-section" class="smooth-scroll-coffee"> <!-- Scroll to coffee section -->
+            <img src="{% static 'images/CoffeeOrder.svg' %}" alt="Coffee" class="coffee">
+        </a>
+    </div>
+
+    <img src="{% static 'images/COFFEE.svg' %}" alt="CoffeeTitle" class="coffee-title">
+    <div id="coffee-section" class="coffee-section">
+        <!-- Placeholder for smooth scrolling -->
+        <div class="scroll-target"></div>
+    </div>
+
+    <!-- Smooth scroll script -->
+    <script>
+        // Add smooth scroll behavior when clicking on links with the smooth-scroll class
+        document.querySelectorAll('a.smooth-scroll-coffee').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Scroll smoothly to the specific coordinates (601, 1120)
+                window.scrollTo({
+                    top: 366,
+                    left: 210,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- ICED TEA SECTION -->
+    <a href="#icedtea-section" class="smooth-scroll-icetea"> <!-- Scroll to coffee section -->
+        <img src="{% static 'images/IcedTeaOrder.svg' %}" alt="IcedTea" class="icedtea">
+    </a>
+    <img src="{% static 'images/ICEDTEA.svg' %}" alt="IcedTeaTitle" class="ice-tea-title">
+    <div id="icedtea-section" class="icedtea-section">
+        <!-- Placeholder for smooth scrolling -->
+        <div class="scroll-target"></div>
+    </div>
+    <!-- Smooth scroll script -->
+    <script>
+        // Add smooth scroll behavior when clicking on links with the smooth-scroll class
+        document.querySelectorAll('a.smooth-scroll-icetea').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Scroll smoothly to the specific coordinates (601, 1120)
+                window.scrollTo({
+                    top: 1120,
+                    left: 210,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- MILKSHAKE SECTION -->
+    <a href="#milk-section" class="smooth-scroll-milk">
+        <img src="{% static 'images/MilkshakesOrder.svg' %}" alt="Milkshake" class="milkshake">
+    </a>
+    <img src="{% static 'images/MILKSHAKE.svg' %}" alt="MilkshakeTitle" class="milkshake-title">
+    <div id="milk-section" class="milk-section">
+        <!-- Placeholder for smooth scrolling -->
+        <div class="scroll-target"></div>
+    </div>
+    <!-- Smooth scroll script -->
+    <script>
+        // Add smooth scroll behavior when clicking on links with the smooth-scroll class
+        document.querySelectorAll('a.smooth-scroll-milk').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Scroll smoothly to the specific coordinates (601, 1120)
+                window.scrollTo({
+                    top: 1877,
+                    left: 558,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+ <!--IRAJ-->
+    {% for product in products %}
+    <button onclick="addToCart('{{ product.name }}', '{{ product.price }}')">
+        <img src="{% static 'images/add.svg' %}" alt="Add to Cart Button" class="button{{ forloop.counter }}">
+    </button>
+    {% endfor %}
+
+
+    
+    <!-- Pop-up message -->
+    <div class="popup" id="popup">
+        Added!
+    </div>
+
+
+    <script>
+        // Function to scroll to the top of the page
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+
+    <!-- Button for scrolling to the top -->
+    <button class="scroll-to-top" onclick="scrollToTop()">
+        &uarr;
+    </button>
+
+
+    <section class="container content-section shopping-cart-section" id="shopping-cart">
+        <h3 class="cart-heading">
+            <img src="{% static 'images/CartCheckout.svg' %}" alt="Shopping Cart">
+        </h3>
+        <table class="table table-hover table-cart cart-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody class="cart-items">
+                <!-- Cart items will be populated here -->
+            </tbody>
+        </table>
+
+        <div class="cart-total">
+            <strong class="cart-total-title">Total</strong>
+            <span class="cart-total-price" style="text-align: right;">Rs0</span>
+        </div>
+
+        <div class="btn-purchase" style="text-align: center;"> <!-- Center the purchase button -->
+            <button type="button" class="btn btn-dark btn-purchase"
+                style="width: 300px; height: 50px; background-color: #465240;"
+                onclick="showPurchasePopup(); getUserInfo()">
+                <i class="fa-solid fa-cart-shopping" style="margin-right: 6%;"></i>PURCHASE
+            </button>
+
+
+        </div>
+    </section>
+
+
+    <script>
+        function addToCart(productName, priceString) {
+            
+            // Show the pop-up message with the recently added product
+            const popup = document.getElementById('popup');
+            popup.textContent = `Added to cart!`;
+            popup.style.display = 'block';
+            const price = parseInt(priceString); // Convert to integer
+    
+            // Hide the pop-up message after 2 seconds
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+
+            // Get the cart items tbody element
+            const cartItemsBody = document.querySelector('.cart-items');
+
+            // Check if the product already exists in the cart
+            const existingRow = Array.from(cartItemsBody.children).find(row => row.firstElementChild.textContent.toLowerCase() === productName.toLowerCase());
+
+            if (existingRow) {
+                // If the product exists, increment the quantity
+                const quantityInput = existingRow.querySelector('input[type="number"]');
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+            } else {
+                // If the product does not exist, create a new row
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+            <td style="font-family: 'Poppins', sans-serif;">${productName}</td>
+            <td style="font-family: 'Poppins', sans-serif;">Rs${price}</td>
+            <td style="font-family: 'Poppins', sans-serif;"><input type="number" value="1" min="1"></td>
+            <td style="font-family: 'Poppins', sans-serif;"><span class="remove-item">Remove</span></td>
+        `;
+                cartItemsBody.appendChild(newRow);
+            }
+
+            // Update the total price
+            updateTotalPrice();
+        }
+
+
+        // Function to update the total price
+        function updateTotalPrice() {
+            // Get all the rows in the cart
+            const cartItems = document.querySelectorAll('.cart-items tr');
+            let totalPrice = 0;
+
+            // Calculate the total price
+            cartItems.forEach(row => {
+                const price = parseFloat(row.children[1].textContent.replace('Rs', '')); // Get the price without the 'Rs' prefix
+                const quantity = parseInt(row.children[2].querySelector('input').value);
+                totalPrice += price * quantity;
+            });
+
+            // Update the total price in the UI
+            const totalElement = document.querySelector('.cart-total-price');
+            totalElement.textContent = `Rs ${totalPrice}`; // Display the total price with 'Rs' prefix
+        }
+
+
+        // Add event listener to handle remove button clicks
+        document.querySelector('.cart-items').addEventListener('click', function (event) {
+            if (event.target.classList.contains('remove-item')) {
+                // Get the row to remove
+                const rowToRemove = event.target.closest('tr');
+                // Remove the row from the table
+                rowToRemove.remove();
+
+                // Update the total price
+                updateTotalPrice();
+            }
+        });
+
+        // Add event listener to handle quantity changes
+        document.querySelector('.cart-items').addEventListener('change', function (event) {
+            if (event.target.tagName === 'INPUT' && event.target.type === 'number') {
+                // Update the total price
+                updateTotalPrice();
+            }
+        });
+
+
+        function showCart() {
+            // Scroll smoothly to the specific coordinates of the shopping cart section
+            window.scrollTo({
+                top: 3400,
+                left: 100,
+                behavior: 'smooth'
+            });
+        }
+
+
+        function showPurchasePopup() {
+            // Get the cart items
+            const cartItems = document.querySelector('.cart-items');
+
+            // Get the total price
+            const totalPrice = document.querySelector('.cart-total-price').textContent;
+
+            // Create a list of products, quantities, individual prices, and total price
+            let purchaseDetails = [];
+            cartItems.querySelectorAll('tr').forEach(row => {
+                const productName = row.querySelector('td:nth-child(1)').textContent;
+                const quantity = parseInt(row.querySelector('input[type="number"]').value);
+                let priceText = row.querySelector('td:nth-child(2)').textContent;
+                // Remove the 'Rs' prefix before parsing the price value
+                priceText = priceText.replace('Rs', '').trim();
+                const price = parseFloat(priceText);
+                const total = quantity * price;
+                purchaseDetails.push({
+                    productName: productName,
+                    quantity: quantity,
+                    price: price,
+                    total: total
+                });
+            });
+
+            // Create the popup content
+            let popupContent = '';
+            purchaseDetails.forEach(item => {
+                popupContent += `${item.productName} - Quantity: ${item.quantity}, Price: Rs${item.price}, Total: Rs${item.total}\n`;
+            });
+            popupContent += `Total Price: ${totalPrice}`;
+
+            // Display the popup at the bottom of the page
+            alert(popupContent);
+
+            // Clear the cart-items table
+            cartItems.innerHTML = '';
+
+            // Reset the total price to Rs0
+            document.querySelector('.cart-total-price').textContent = 'Rs0';
+
+            // Store the purchaseDetails in localStorage
+            localStorage.setItem('purchaseDetails', JSON.stringify(purchaseDetails));
+
+            // Redirect to the user page
+            window.location.href = 'user_page.html';
+        }
+
+    </script>
+
+</body>
+
+</html>

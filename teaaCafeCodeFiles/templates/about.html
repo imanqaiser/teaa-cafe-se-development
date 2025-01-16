@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="{% static './css/mainabout.css' %}" rel="stylesheet" />
+  <title>Teaa Cafe</title>
+</head>
+<body>
+  <div class="aboutpage">
+    <!-- rectangle -->
+    <div class="backing-rectangle"></div>
+
+     <!-- images -->
+    <div class="logo-container">
+        <img src="{% static 'images/Logo.svg' %}" alt="Logo">
+      </div>
+ 
+   
+    <a href="about.html">
+      <img src="{% static 'images/About.svg' %}" alt="About" class="about">
+    </a>
+
+    <a href="home.html">
+        <img src="{% static 'images/Home.svg' %}" alt="Home" class="home">
+      </a>
+    
+      <a href="location.html">
+        <img src="{% static 'images/Location.svg' %}" alt="Location" class="location">
+      </a>
+
+      <a href="order.html">
+        <img src="{% static 'images/Order.svg' %}" alt="Order" class="order">
+      </a>
+
+      <img class="cafe-image" src="{% static 'images/cafeimage.png' %}" alt="Cafe Image">
+
+      <img src="{% static 'images/abouttext.svg' %}" alt="About Text" class="about-text">
+
+      <img src="{% static 'images/ABOUT US.svg' %}" alt="About Us" class="about-us">
+
+
+
+  </div>
+</body>
+</html>

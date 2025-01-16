@@ -1,0 +1,264 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href= "{%static './css/mainsignup.css' %}" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <title>Signup Page</title>
+</head>
+
+<body style="background-color: #A3AE9E; height: 500px;">
+    <ul id="purchaseDetailsList"></ul>
+
+
+    <!-- Checkbox -->
+    <div class="checkbox-wrapper-12">
+        <div class="cbx">
+            <input id="cbx-12" type="checkbox" />
+            <label for="cbx-12"></label>
+            <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
+                <path d="M2 8.36364L6.23077 12L13 2"></path>
+            </svg>
+        </div>
+        <!-- Gooey-->
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <defs>
+                <filter id="goo-12">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"></feGaussianBlur>
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7"
+                        result="goo-12"></feColorMatrix>
+                    <feBlend in="SourceGraphic" in2="goo-12"></feBlend>
+                </filter>
+            </defs>
+        </svg>
+    </div>
+    <div class="input-container input1-position">
+        <input type="text" id="input1" class="custom-input-1" required placeholder="John">
+    </div>
+
+    <div class="input-container input2-position">
+        <input type="text" id="input2" class="custom-input-2" required placeholder="Doe">
+    </div>
+
+    <div class="input-container input3-position">
+        <input type="text" id="input3" class="custom-input-3" required placeholder="JohnD.123">
+    </div>
+
+
+    <div class="input-container input4-position">
+        <input type="password" id="input4" class="custom-input-4" required placeholder="*********">
+    </div>
+
+    <div class="input-container input5-position">
+        <input type="text" id="input5" class="custom-input-5" placeholder="+92-123-4519890">
+    </div>
+
+    <div class="input-container input6-position">
+        <input type="text" id="input6" class="custom-input-6" required placeholder="john_doe@email.com">
+    </div>
+
+    <div class="input-container input7-position">
+        <input type="text" id="input7" class="custom-input-7" required placeholder="Islamabad">
+    </div>
+
+    <div class="input-container input8-position">
+        <input type="text" id="input8" class="custom-input-8" required placeholder="Sector/Area/Colony">
+    </div>
+
+    <div class="input-container input9-position">
+        <input type="text" id="input9" class="custom-input-9" required placeholder="Street 13">
+    </div>
+    <div class="input-container input10-position">
+        <input type="text" id="input10" class="custom-input-10" required placeholder="345">
+    </div>
+
+
+
+    <button onclick="buttonClicked()">
+        <img src="{%static 'images/Button.svg' %}" alt="Sign Up Button" class="signup-button">
+    </button>
+
+    <div class="header background-image">
+        <img src="{%static 'images/SignUpBackground.svg' %}" alt="Signup Background Image">
+    </div>
+
+     <!--iraj -->
+    <div id="userexistsPopup" class="error-popup">
+        <img src="{% static 'images/UsernamedUsedError.svg' %}" alt="user_existsError" class="error-image">
+    </div>
+
+    <div id="emailexistsPopup" class="error-popup">
+        <img src="{% static 'images/EmailUsedError.svg' %}" alt="email_existsError" class="error-image">
+    </div>
+
+
+    <script>
+        function buttonClicked() {
+
+            // Check if the checkbox is checked
+            const checkbox = document.getElementById('cbx-12');
+            const checkboxStatus = checkbox.checked ? 'Checked' : 'Unchecked';
+
+            // Retrieve values of each input field
+            const input1 = document.getElementById('input1').value;
+            const input2 = document.getElementById('input2').value;
+            const input3 = document.getElementById('input3').value;
+            const input4 = document.getElementById('input4').value;
+            const input5 = document.getElementById('input5').value;
+            const input6 = document.getElementById('input6').value;
+            const input7 = document.getElementById('input7').value;
+            const input8 = document.getElementById('input8').value;
+            const input9 = document.getElementById('input9').value;
+            const input10 = document.getElementById('input10').value;
+
+            if (input1 === '' || input2 === '' || input3 === '' || input4 === '' || input6 === '' || input7 === '' || input8 === '' || input9 === '' || input10 === '' || checkboxStatus === 'Unchecked') {
+                // Display error message
+                alert('Please fill in all required fields.');
+            } else {
+
+                //IRAJ
+                // Display information in an alert
+                // Create a FormData object to store form data
+                const formData = new FormData();
+                // Append CSRF token to the FormData object
+                formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                formData.append('firstname', input1);
+                formData.append('lastname', input2);
+                formData.append('username', input3);
+                formData.append('password', input4);
+                formData.append('telephone', input5);
+                formData.append('email', input6);
+                formData.append('city', input7);
+                formData.append('area', input8);
+                formData.append('street', input9);
+                formData.append('house', input10);
+
+                // Send the signup data to the server using AJAX
+                const signup_xhr = new XMLHttpRequest();
+                signup_xhr.open('POST', 'signup_page.html', true);
+                signup_xhr.onload = function () {
+                    if (signup_xhr.status >= 200 && signup_xhr.status < 300){
+
+                        // Handle successful response from the server
+                        const response = JSON.parse(signup_xhr.responseText);
+                        
+                        if (response.message == 'Username already in use'){
+                        const errorPopup = document.getElementById('userexistsPopup');
+                        errorPopup.style.display = 'block';
+                        setTimeout(function () {
+                                errorPopup.style.display = 'none';
+                            }, 2000);
+                        }
+
+                        if (response.message == 'Email already in use'){
+                        const errorPopup = document.getElementById('emailexistsPopup');
+                        errorPopup.style.display = 'block';
+                        setTimeout(function () {
+                                errorPopup.style.display = 'none';
+                            }, 2000);
+                        }
+
+                        if (response.message == 'Account created successfully!') {
+                            // Display response message on the screen
+                            alert(response.message);
+                            const purchaseData = new FormData();
+                            purchaseData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                            purchaseData.append('username', input3);
+
+                            const purchaseDetails = JSON.parse(localStorage.getItem('purchaseDetails'));
+                            // Append purchase details (if available)
+                            if (purchaseDetails && purchaseDetails.length > 0) {
+                                purchaseDetails.forEach(item => {
+                                    purchaseData.append('purchaseDetails', JSON.stringify(item)); // Append each purchase detail
+                                });
+                            }
+                            // Send purchase details with username to the server using another AJAX request
+                            const purchaseXHR = new XMLHttpRequest();
+                            purchaseXHR.open('POST', 'home.html', true);
+
+                            purchaseXHR.onload = function () {
+                                 // Handle successful response from the server
+                                if (purchaseXHR.status >= 200 && purchaseXHR.status < 300) {
+                                    const response = JSON.parse(purchaseXHR.responseText);
+                                    // Display response message on the screen
+                                    alert(response.message);
+                                    window.location.href = 'invoice.html?order_id=' + response.order_id; 
+                                }
+                                else {
+                                alert('Error occurred while sending purchase details.');
+                                }
+                            };
+                            purchaseXHR.onerror = function () {
+                                // Handle network error if needed
+                                console.error('Error occurred while saving purchase details.');
+                                };
+                            purchaseXHR.send(purchaseData); // Send purchase data to the server
+                            }
+                        }
+
+                    else {
+                        alert('Error occured while sending signup details.');
+                    }
+                };
+
+                signup_xhr.onerror = function () {
+                // Handle network error
+                alert('Network error occurred.');
+                };
+                signup_xhr.send(formData);
+
+                alert(
+                    `Checkbox status: ${checkboxStatus}\n` +
+                    `First Name: ${input1}\n` +
+                    `Last Name: ${input2}\n` +
+                    `Username: ${input3}\n` +
+                    `Password: ${input4}\n` +
+                    `Telephone: ${input5}\n` +
+                    `Email Address: ${input6}\n` +
+                    `City: ${input7}\n` +
+                    `Area: ${input8}\n` +
+                    `Street Number: ${input9}\n` +
+                    `House: ${input10}\n`
+                   
+                );
+            }
+
+
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve purchaseDetails from localStorage
+            const purchaseDetails = JSON.parse(localStorage.getItem('purchaseDetails'));
+
+            // Check if purchaseDetails is not empty
+            if (purchaseDetails && purchaseDetails.length > 0) {
+                // Initialize an empty string to store the formatted details
+                let detailsString = '';
+
+                // Loop through purchaseDetails array
+                purchaseDetails.forEach(item => {
+                    // Format each item and append it to the details string
+                    detailsString += `${item.productName} - Quantity: ${item.quantity}, Price: Rs${item.price}, Total: Rs${item.total}\n`;
+                });
+
+                // Display the formatted details in an alert
+                alert('Purchase Details:\n' + detailsString);
+            } else {
+                // If purchaseDetails is empty, display a message in the alert
+                alert('No purchase details found.');
+            }
+
+            // Clear purchaseDetails from localStorage
+            //localStorage.removeItem('purchaseDetails');
+        });
+
+
+    </script>
+</body>
+
+</html>

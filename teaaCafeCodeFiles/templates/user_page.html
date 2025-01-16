@@ -1,0 +1,171 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static './css/mainuser.css' %}" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <title>User Page</title>
+</head>
+
+<body style="background-color: #EEE9D9; height: 700px; margin: 0;">
+    <ul id="purchaseDetailsList"></ul>
+
+
+    <div class="input-container username-position">
+        <input type="text" id="username" class="username-input" required placeholder="Username">
+    </div>
+
+    <div class="input-container password-position">
+        <input type="password" id="password" class="password-input" required placeholder="Password">
+    </div>
+
+    <!-- Button to redirect to sign-up page -->
+    <button id="loginButton">
+        <img src="{% static 'images/LoginButton.svg' %}" alt="Login Button" class="login-button">
+    </button>
+
+    <button id="signupButton">
+        <img src="{% static 'images/SignUpButton.svg' %}" alt="Signup Button" class="signup-button">
+    </button>
+
+    <div class="header background-image">
+        <img src="{% static 'images/UserLogin.svg' %}" alt="Login Background Image">
+    </div>
+
+
+    <!--iraj -->
+    <div id="no_userPopup" class="error-popup">
+        <img src="{% static 'images/UserDoesntExistError.svg' %}" alt="no_userError" class="error-image">
+    </div>
+
+    <div id="passwordPopup" class="error-popup">
+        <img src="{% static 'images/IncorrectPasswordError.svg' %}" alt="passwordError" class="error-image">
+    </div>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve purchaseDetails from localStorage
+            const purchaseDetails = JSON.parse(localStorage.getItem('purchaseDetails'));
+
+            // Display purchaseDetails in a popup alert
+            if (purchaseDetails && purchaseDetails.length > 0) {
+                let detailsString = 'Purchase Details:\n';
+                purchaseDetails.forEach(item => {
+                    detailsString += `${item.productName} - Quantity: ${item.quantity}, Price: Rs${item.price}, Total: Rs${item.total}\n`;
+                });
+                alert(detailsString);
+            } else {
+                alert('No purchase details found.');
+            }
+
+            document.getElementById('loginButton').addEventListener('click', function() {
+            // Retrieve username and password input values
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+
+            //IRAJ
+            const formData = new FormData();
+            // Append CSRF token to the FormData object
+            formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            formData.append('username', username);
+            formData.append('password', password);
+
+            // Send the login credentials to the server using AJAX
+            const login_xhr = new XMLHttpRequest();
+            login_xhr.open('POST', 'user_page.html', true);
+            login_xhr.onload = function () {
+                if (login_xhr.status >= 200 && login_xhr.status < 300){
+                
+                    // Handle successful response from the server
+                    const response = JSON.parse(login_xhr.responseText);
+                    
+
+                    if (response.message == 'Username does not exist.'){
+                        const errorPopup = document.getElementById('no_userPopup');
+                        errorPopup.style.display = 'block';
+                        setTimeout(function () {
+                                errorPopup.style.display = 'none';
+                            }, 2000);
+                        }
+                    
+                    if (response.message == 'Wrong password entered.'){
+                    const errorPopup = document.getElementById('passwordPopup');
+                    errorPopup.style.display = 'block';
+                    setTimeout(function () {
+                            errorPopup.style.display = 'none';
+                        }, 2000);
+                    }
+                
+                    if (response.message == 'Logged in successfully.') {
+                        // Display response message on the screen
+                        alert(response.message);
+                        const purchaseData = new FormData();
+                        purchaseData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                        purchaseData.append('username', username); //to get user details at the server
+                        // Append purchase details (if available)
+                        if (purchaseDetails && purchaseDetails.length > 0) {
+                            purchaseDetails.forEach(item => {
+                                purchaseData.append('purchaseDetails', JSON.stringify(item)); // Append each purchase detail
+                            });
+                        }
+                         // Send purchase details with username to the server using another AJAX request
+                         const purchaseXHR = new XMLHttpRequest();
+                         purchaseXHR.open('POST', 'home.html', true);
+                         purchaseXHR.onload = function () {
+                            // Handle successful response from the server
+                            if (purchaseXHR.status >= 200 && purchaseXHR.status < 300) {
+                                const response = JSON.parse(purchaseXHR.responseText);
+                                // Display response message on the screen
+                                alert(response.message);
+                                window.location.href = 'invoice.html?order_id=' + response.order_id; 
+                            }
+                            else {
+                                alert('Error occurred while sending purchase details.');
+                            }
+                         };
+                         purchaseXHR.onerror = function () {
+                            // Handle network error if needed
+                            console.error('Error occurred while saving purchase details.');
+                         };
+                         purchaseXHR.send(purchaseData); // Send purchase data to the server
+                        }
+                    }
+
+                else{
+                    alert('Error occurred while sending login details.');
+                }
+            };
+            login_xhr.onerror = function () {
+            // Handle network error
+            alert('Network error occurred.');
+            };
+            login_xhr.send(formData);
+            
+
+            // Display username and password in an alert
+            alert(`Username: ${username}\nPassword: ${password}`);
+
+        });
+
+            // Event listener for the sign-up button
+            document.getElementById('signupButton').addEventListener('click', function () {
+                // Retrieve purchaseDetails from localStorage
+                const purchaseDetails = JSON.parse(localStorage.getItem('purchaseDetails'));
+
+                    window.location.href = 'signup_page.html'; // Redirect to sign-up page
+                
+            });
+        });
+    </script>
+
+</body>
+
+</html>

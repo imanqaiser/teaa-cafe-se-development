@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{% static './css/mainlocation.css' %}" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    
+        <title>Location</title>
+    </head>
+   
+
+
+    <body style="background-color: #A3AE9E">
+        <div class="header"></div>
+        <!-- rectangle -->
+        <div class="backing-rectangle-green"></div>
+
+        <div class="logo-container">
+            <img src="{% static 'images/LogoOrder.svg' %}" alt="Logo">
+        </div>
+        <a href="about.html">
+            <img src="{% static 'images/AboutOrder.svg' %}" alt="About" class="about">
+        </a>
+        <a href="home.html">
+            <img src="{% static 'images/HomeOrder.svg' %}" alt="Home" class="home">
+        </a>
+        <a href="order.html">
+            <img src="{% static 'images/OrderLocation.svg' %}" alt="Order" class="order">
+        </a>
+
+        <div class="page-contents">
+            <img src="{% static 'images/LocationPageContents.svg' %}" alt="PageContents">
+        </div>
+
+         <!-- Button for scrolling to the top -->
+        <button class="scroll-to-top" onclick="scrollToTop()">
+            &uarr;
+        </button>
+        <script>
+            // Function to scroll to the top of the page
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        </script>
+
+        <!-- Add the input form box -->
+        <input type="text" class="user-input" placeholder="ENTER LOCATION NAME HERE..." onkeypress="handleKeyPress(event)">
+
+        <div id="errorPopup" class="error-popup">
+            <img src="{% static 'images/locationerorrPopup.svg' %}" alt="Error" class="error-image">
+        </div>
+
+       
+        <script>
+            function handleKeyPress(event) {
+                if (event.key === 'Enter') { // Check if the pressed key is Enter
+                    const userInput = event.target.value.toLowerCase(); // Convert to lowercase for case insensitivity
+                    event.target.value = ""; // Clear the text box
+
+                    const formData = new FormData();
+                    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                    formData.append('location', userInput);
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'location.html', true);
+                    xhr.onload = function (){
+                        const response = JSON.parse(xhr.responseText);
+                        //alert(response.loc_id);
+                        let functionToCall = response.loc_id;
+                        switch (functionToCall) {
+                        case 1:
+                            window.scrollTo({
+                                top: 730,
+                                left: 763,
+                                behavior: 'smooth'
+                            });
+                            break;
+                        case 2:
+                            window.scrollTo({
+                                top: 1850,
+                                left: 795,
+                                behavior: 'smooth'
+                            });
+                            break;
+                        case 3:
+                            window.scrollTo({
+                                top: 2750,
+                                left: 152,
+                                behavior: 'smooth'
+                            });
+                            break;
+                        default:
+                            const errorPopup = document.getElementById('errorPopup');
+                            errorPopup.style.display = 'block';
+    
+                            // Hide the error popup after 3 seconds
+                            setTimeout(function () {
+                                errorPopup.style.display = 'none';
+                            }, 2000);
+                            break;
+                        }
+
+
+                    };
+                    xhr.onerror = function () {
+                    // Handle network error
+                    alert('Network error occurred.');
+                    };
+
+                    xhr.send(formData);
+
+                }
+            }
+        </script>
+
+        
+    
+    
+    </body>
+
+
+
+</html>
