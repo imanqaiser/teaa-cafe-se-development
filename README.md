@@ -1,1 +1,4 @@
 # teaa-cafe-se-development
+This project is an e-commerce platform designed to modernize the café experience for Teaa Cafe. Built with Django and PostgreSQL, it streamlines online ordering, payment processing, and backend operations like order tracking and funds management. The platform integrates a user-friendly interface with a robust backend to deliver a seamless experience for both customers and management.
+<img width="1297" alt="image" src="https://github.com/user-attachments/assets/2c3ce7d4-8146-4286-99ae-e7f6fc1884a8" />
+This project was developed to explore software engineering concepts and the phases of the classical waterfall model, including comprehensive requirements analysis and rigorous verification and validation testing.This approach and its implementation are detailed in the attached documentation.
